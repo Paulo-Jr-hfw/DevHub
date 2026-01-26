@@ -1,0 +1,36 @@
+package com.app.devhub.viewModel
+
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+
+data class BuscaUiState(
+    val searchText: String = "",
+    val isLoading: Boolean = false
+)
+
+class BuscaViewModel : ViewModel() {
+
+    private val _uiState = MutableStateFlow(BuscaUiState(searchText =""))
+    val uiState = _uiState.asStateFlow()
+
+    fun onSearchChange(newText: String) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                searchText = newText
+            )
+        }
+    }
+
+//    fun onSearchClick() {
+//        val textoParaBusca = _uiState.value.searchText
+//        if (textoParaBusca.isNotBlank()) {
+//            onSearchExecute(textoParaBusca)
+//        }
+//    }
+//
+//    private fun onSearchExecute(usuarioBuscado: String) {
+//        }
+    }
+
