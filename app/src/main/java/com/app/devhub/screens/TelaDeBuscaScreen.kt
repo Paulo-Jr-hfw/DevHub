@@ -12,18 +12,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.devhub.components.gitHubLogoAnimated
 import com.app.devhub.components.searchBar
-import com.app.devhub.ui.theme.DevHubTheme
 import com.app.devhub.viewModel.BuscaViewModel
 
 @Composable
 fun telaDeBusca(
     buscaViewModel : BuscaViewModel = viewModel(),
-    onSearchExecute: (String) -> Unit
+    onNavigateToProfile: (String) -> Unit
 ) {
     val uiState by buscaViewModel.uiState.collectAsState()
 
@@ -32,7 +30,7 @@ fun telaDeBusca(
         onSearchChange = buscaViewModel::onSearchChange,
         onSearchClick = {
             if (uiState.searchText.isNotBlank()) {
-                onSearchExecute(uiState.searchText)
+                onNavigateToProfile(uiState.searchText)
             }
         }
     )

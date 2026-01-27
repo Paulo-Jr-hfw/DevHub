@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,19 +33,41 @@ import com.app.devhub.R
 import com.app.devhub.ui.theme.DevHubTheme
 import com.app.devhub.viewModel.ProfileViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.app.devhub.model.GitProfileWeb
+import com.app.devhub.viewModel.ProfileUiState
 
 @Composable
-fun telaResultado(
+fun telaPerfil(
     username: String,
     viewModel: ProfileViewModel = viewModel()) {
 
-    val gitProfileWeb = viewModel.user.collectAsState().value
+    val uiState by viewModel.uiState.collectAsState()
+
 
     LaunchedEffect(username) {
         viewModel.loadUser(username)
     }
 
-    gitProfileWeb?.let { user ->
+    when (val state = uiState) {
+        is ProfileUiState.Loading -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(color = Color.Blue)
+            }
+        }
+        is ProfileUiState.Success -> {
+            ProfileContent(user = state.user)
+        }
+        is ProfileUiState.Error -> {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = state.message, color = Color.Red)
+            }
+        }
+        ProfileUiState.Empty -> { /* Nada para mostrar */ }
+    }
+}
+
+@Composable
+fun ProfileContent(user: GitProfileWeb) {
     Box(modifier = Modifier.fillMaxSize()) {
         val headerHeight = 150.dp
         val imageSize = 150.dp
@@ -58,7 +82,7 @@ fun telaResultado(
                     )
                 )
                 .height(headerHeight)
-                )
+        )
 
 
         AsyncImage(
@@ -87,8 +111,8 @@ fun telaResultado(
             Text("Repositórios: ${user.repositories}")
         }
     }
-        }
-    }
+
+}
 
 
 
@@ -96,6 +120,6 @@ fun telaResultado(
 @Composable
 fun GreetingPreview() {
     DevHubTheme {
-        telaResultado(username = "teste")
+        telaPerfil(username = "teste")
     }
 }
