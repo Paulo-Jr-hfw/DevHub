@@ -12,10 +12,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.devhub.components.gitHubLogoAnimated
 import com.app.devhub.components.searchBar
+import com.app.devhub.ui.theme.DevHubTheme
 import com.app.devhub.viewModel.BuscaViewModel
 
 @Composable
@@ -61,11 +63,14 @@ fun TelaDeBuscaContent(
     }
 }
 
-//@Preview
-//@Composable
-//private fun telabuscaPreview() {
-//    DevHubTheme {
-//        telaDeBusca()
-//    }
-//
-//}
+@Preview (showBackground = true)
+@Composable
+private fun telabuscaPreview() {
+    DevHubTheme {
+        TelaDeBuscaContent(
+            searchText = "Paulo Junior",
+            onSearchChange = {},
+            onSearchClick = {}
+        )
+    }
+}
