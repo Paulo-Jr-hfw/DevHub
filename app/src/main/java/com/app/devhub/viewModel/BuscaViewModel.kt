@@ -22,15 +22,13 @@ class BuscaViewModel : ViewModel() {
             )
         }
     }
+    fun limparTexto() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                searchText = ""
+            )
+        }
+    }
 
-//    fun onSearchClick() {
-//        val textoParaBusca = _uiState.value.searchText
-//        if (textoParaBusca.isNotBlank()) {
-//            onSearchExecute(textoParaBusca)
-//        }
-//    }
-//
-//    private fun onSearchExecute(usuarioBuscado: String) {
-//        }
     }
 

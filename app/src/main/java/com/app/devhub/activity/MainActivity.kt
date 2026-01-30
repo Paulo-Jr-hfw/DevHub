@@ -4,16 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.app.devhub.screens.telaDeBusca
-import com.app.devhub.screens.telaPerfil
+import com.app.devhub.screens.TelaPerfil
 import com.app.devhub.ui.theme.DevHubTheme
+import com.app.devhub.viewModel.BuscaViewModel
 
 class MainActivity : ComponentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,21 +20,28 @@ class MainActivity : ComponentActivity() {
             setContent {
                 DevHubTheme {
                     val navController = rememberNavController()
+                    val buscaViewModel: BuscaViewModel = viewModel()
+
                     NavHost(
                         navController = navController,
                         startDestination = "busca"
                     ) {
                         composable(route = "busca") {
                             telaDeBusca(
+                                buscaViewModel = buscaViewModel,
                                 onNavigateToProfile = { usuario ->
                                     navController.navigate("perfil/$usuario")
+                                    buscaViewModel.limparTexto()
                                 }
                             )
                         }
 
                         composable(route = "perfil/{username}") { backStackEntry ->
                             val username = backStackEntry.arguments?.getString("username") ?: ""
-                            telaPerfil(username = username)
+                            TelaPerfil(username = username,
+                                onVoltarClick = {navController.popBackStack()
+                                }
+                            )
                         }
                     }
                 }
