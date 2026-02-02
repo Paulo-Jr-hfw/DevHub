@@ -1,11 +1,12 @@
-package com.app.devhub.viewModel
+package com.app.devhub.screens.perfil
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.devhub.model.GitProfileWeb
 import com.app.devhub.model.GitRepoWeb
-import com.app.devhub.retrofitApi.RetrofitInitializer
+import com.app.devhub.data.remote.retrofitApi.RetrofitInitializer
 import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,7 +29,9 @@ class ProfileViewModel: ViewModel() {
         viewModelScope.launch {
             _uiState.value = ProfileUiState.Loading
             try {
-                //async para iniciar as duas buscas em paralelo
+                //async para iniciar as duas buscas em paralelo + CoroutineScope para esperar as respostas
+
+                coroutineScope {
                 val userDeferred = async { RetrofitInitializer.api.getUser(username) }
                 val reposDeferred = async { RetrofitInitializer.api.getUserRepos(username) }
                 val userResponse = userDeferred.await()
@@ -38,6 +41,7 @@ class ProfileViewModel: ViewModel() {
                     user = userResponse,
                     repositories = reposResponse
                 )
+            }
             } catch (e: Exception) {
                 _uiState.value = ProfileUiState.Error("Usuário não encontrado ou erro de rede")
                 e.printStackTrace()

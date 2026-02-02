@@ -1,4 +1,4 @@
-package com.app.devhub.retrofitApi
+package com.app.devhub.data.remote.retrofitApi
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

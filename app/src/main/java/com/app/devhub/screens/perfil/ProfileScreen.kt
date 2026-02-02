@@ -1,4 +1,4 @@
-package com.app.devhub.screens
+package com.app.devhub.screens.perfil
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -50,8 +50,6 @@ import coil.compose.AsyncImage
 import com.app.devhub.R
 import com.app.devhub.model.GitProfileWeb
 import com.app.devhub.model.GitRepoWeb
-import com.app.devhub.viewModel.ProfileUiState
-import com.app.devhub.viewModel.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -143,7 +141,7 @@ fun PerfilCard(user: GitProfileWeb) {
 
         AsyncImage(
             model = user.avatarUrl,
-            placeholder = painterResource(R.drawable.foto_perfil),
+            placeholder = painterResource(R.drawable.image_icon),
             contentDescription = "foto perfil",
             modifier = Modifier
                 .size(imageSize)

@@ -1,4 +1,4 @@
-package com.app.devhub.viewModel
+package com.app.devhub.screens.busca
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

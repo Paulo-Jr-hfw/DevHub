@@ -8,7 +8,7 @@ data class GitProfileWeb(
     val user: String,
     val bio: String?,
     @SerializedName("avatar_url")
-    val avatarUrl: String,
+    val avatarUrl: String?,
     @SerializedName("public_repos")
-    val repositories: Int
+    val repositories: Int?
 )

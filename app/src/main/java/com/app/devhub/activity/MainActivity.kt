@@ -8,10 +8,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.app.devhub.screens.telaDeBusca
-import com.app.devhub.screens.TelaPerfil
+import com.app.devhub.screens.busca.telaDeBusca
+import com.app.devhub.screens.perfil.TelaPerfil
 import com.app.devhub.ui.theme.DevHubTheme
-import com.app.devhub.viewModel.BuscaViewModel
+import com.app.devhub.screens.busca.BuscaViewModel
 
 class MainActivity : ComponentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {

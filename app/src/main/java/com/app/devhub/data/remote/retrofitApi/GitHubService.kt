@@ -1,4 +1,4 @@
-package com.app.devhub.retrofitApi
+package com.app.devhub.data.remote.retrofitApi
 
 import com.app.devhub.model.GitProfileWeb
 import com.app.devhub.model.GitRepoWeb

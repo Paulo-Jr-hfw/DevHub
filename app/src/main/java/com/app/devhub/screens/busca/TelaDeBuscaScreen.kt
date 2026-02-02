@@ -1,4 +1,4 @@
-package com.app.devhub.screens
+package com.app.devhub.screens.busca
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.devhub.components.gitHubLogoAnimated
 import com.app.devhub.components.searchBar
 import com.app.devhub.ui.theme.DevHubTheme
-import com.app.devhub.viewModel.BuscaViewModel
 
 @Composable
 fun telaDeBusca(
