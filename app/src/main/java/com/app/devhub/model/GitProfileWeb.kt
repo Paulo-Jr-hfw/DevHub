@@ -1,5 +1,6 @@
 package com.app.devhub.model
 
+import com.app.devhub.data.local.room.GitProfileEntity
 import com.google.gson.annotations.SerializedName
 
 data class GitProfileWeb(
@@ -12,3 +13,13 @@ data class GitProfileWeb(
     @SerializedName("public_repos")
     val repositories: Int?
 )
+
+fun GitProfileWeb.toEntity(): GitProfileEntity {
+    return GitProfileEntity(
+        user = this.user,
+        name = this.name,
+        avatarUrl = this.avatarUrl,
+        bio = this.bio,
+        repositories = this.repositories
+    )
+}

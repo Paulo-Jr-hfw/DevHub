@@ -45,17 +45,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.app.devhub.R
-import com.app.devhub.model.GitProfileWeb
+import com.app.devhub.data.local.room.GitProfileEntity
 import com.app.devhub.model.GitRepoWeb
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaPerfil(
     username: String,
-    viewModel: ProfileViewModel = viewModel(),
+    viewModel: ProfileViewModel = hiltViewModel(),
     onVoltarClick: () -> Unit) {
 
     val uiState by viewModel.uiState.collectAsState()
@@ -94,7 +95,7 @@ fun TelaPerfil(
 
 @Composable
 fun ProfileContent(
-    user: GitProfileWeb,
+    user: GitProfileEntity,
     repositories: List<GitRepoWeb>
 ) {
     LazyColumn(
@@ -121,7 +122,7 @@ fun ProfileContent(
 }
 
 @Composable
-fun PerfilCard(user: GitProfileWeb) {
+fun PerfilCard(user: GitProfileEntity) {
     Box(modifier = Modifier.fillMaxWidth()) {
         val headerHeight = 150.dp
         val imageSize = 150.dp

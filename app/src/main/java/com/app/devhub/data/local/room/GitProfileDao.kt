@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.app.devhub.data.local.room.GitProfileEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -26,4 +25,6 @@ interface GitProfileDao {
     @Query("SELECT EXISTS(SELECT 1 FROM perfil_favorito WHERE user = :username)")
     suspend fun isFavorite(username: String): Boolean
 
+    @Query ("SELECT * FROM perfil_favorito WHERE user = :username")
+    suspend fun getProfileByUsername (username: String): GitProfileEntity?
 }

@@ -12,7 +12,9 @@ import com.app.devhub.screens.busca.telaDeBusca
 import com.app.devhub.screens.perfil.TelaPerfil
 import com.app.devhub.ui.theme.DevHubTheme
 import com.app.devhub.screens.busca.BuscaViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)

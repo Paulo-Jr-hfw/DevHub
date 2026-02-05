@@ -2,26 +2,30 @@ package com.app.devhub.screens.perfil
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.devhub.model.GitProfileWeb
+import com.app.devhub.data.local.room.GitProfileEntity
 import com.app.devhub.model.GitRepoWeb
-import com.app.devhub.data.remote.retrofitApi.RetrofitInitializer
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import com.app.devhub.data.repository.GitProfileRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 sealed class ProfileUiState {
     object Loading : ProfileUiState()
-    data class Success(val user: GitProfileWeb,
+    data class Success(
+        val user: GitProfileEntity,
         val repositories: List<GitRepoWeb>
     ) : ProfileUiState()
     data class Error(val message: String) : ProfileUiState()
     object Empty : ProfileUiState()
 }
 
-class ProfileViewModel: ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val repository: GitProfileRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Empty)
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
 
@@ -29,21 +33,15 @@ class ProfileViewModel: ViewModel() {
         viewModelScope.launch {
             _uiState.value = ProfileUiState.Loading
             try {
-                //async para iniciar as duas buscas em paralelo + CoroutineScope para esperar as respostas
-
-                coroutineScope {
-                val userDeferred = async { RetrofitInitializer.api.getUser(username) }
-                val reposDeferred = async { RetrofitInitializer.api.getUserRepos(username) }
-                val userResponse = userDeferred.await()
-                val reposResponse = reposDeferred.await()
+                val (user, repos) = repository.getFullProfile(username)
 
                 _uiState.value = ProfileUiState.Success(
-                    user = userResponse,
-                    repositories = reposResponse
+                    user = user,
+                    repositories = repos
                 )
-            }
+
             } catch (e: Exception) {
-                _uiState.value = ProfileUiState.Error("Usuário não encontrado ou erro de rede")
+                _uiState.value = ProfileUiState.Error("Usuário não encontrado")
                 e.printStackTrace()
             }
         }
