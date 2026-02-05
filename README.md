@@ -11,18 +11,21 @@
 - **Kotlin** - linguagem principal
 - **Jetpack Compose** - UI moderna declarativa
 - **Retrofit + Gson** - consumo de API
+- **Room Database** - Persistência local para cache e favoritos
+- **Hilt (Dagger)** - Injeção de Dependência para um código desacoplado e testável.
+- **Coroutines & Flow** - Programação assíncrona e fluxo de dados em tempo real.
+- **Arquitetura MVVM + Repository Pattern** - Separação clara de responsabilidades.
 - **Android Studio** - IDE
 
 ---
 
-## 🚀 Funcionalidades
+## 🚀 Funcionalidades Atuais
 
-- [x] Busca de perfis do GitHub
-- [x] Tela de perfil detalhada
-- [x] Listagem de repositórios
-- [x] Animação e UI responsiva
-- [x] Sistema de navegação entre telas (Navigation Compose)
-- [ ] Persistência local com Room
+- [x] Busca em tempo real: Pesquisa de perfis do GitHub via API oficial.
+- [x] Arquitetura Robusta: Implementação de Injeção de Dependência (Hilt)
+- [x] Cache Inteligente: Repositório que gerencia dados locais (Room) e remotos.
+- [x] Navegação: Sistema de rotas dinâmicas com Navigation Compose.
+- [x] UI Dinâmica: Feedbacks de loading, erro e estados vazios com animações.
 
 ---
 
@@ -33,18 +36,24 @@
 ## 📝 Histórico de versões
 
 v0.1 - Estrutura inicial, tela de busca e perfil
-v0.2 - Integração Retrofit e animações
+v0.2 - Implementação do Navigation Compose e múltiplas telas.
+v0.3 - Integração com Retrofit e animações Lottie.
 v0.3 - Refatoração e melhorias de UI
-v0.4 - Limpeza de arquivos e gitignore ajustado
+v0.4 - Adição da camada de persistência com Room.
+v0.5 - Refatoração para Repository Pattern e implementação de DI com Hilt.
 
 ## 💡 Próximos passos
 
 - ~~Implementar sistema de navegação com Navigation Compose~~
 
-- Adicionar persistência local (Room)
+- ~~Adicionar persistência local (Room)~~
+
+- Implementar UI da tela de Favoritos.
+
+- Adicionar funcionalidade de "Desfavoritar" com feedback visual (Toast/Snackbar).
+
+- Melhorar o design dos cards de repositórios.
 
 - Melhorar feedback de loading
 
 - Criar testes unitários
-
-- Melhorar Designer de apresentação
