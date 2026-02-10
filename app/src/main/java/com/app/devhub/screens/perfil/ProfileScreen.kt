@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarBorder
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,7 +47,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.app.devhub.R
 import com.app.devhub.data.local.room.GitProfileEntity
@@ -60,10 +60,13 @@ fun TelaPerfil(
     onVoltarClick: () -> Unit) {
 
     val uiState by viewModel.uiState.collectAsState()
+    val isFavorite by viewModel.isFavorite.collectAsState()
+
 
 
     LaunchedEffect(username) {
         viewModel.loadUser(username)
+        viewModel.checkFavoriteStatus(username)
     }
 
     Scaffold(
@@ -74,11 +77,19 @@ fun TelaPerfil(
                     IconButton(onClick = onVoltarClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, "Voltar")
                     }
+                },
+                actions = {
+                    if (uiState is ProfileUiState.Success) {
+                        FavoriteButton(
+                            viewModel,
+                            userEntity = (uiState as ProfileUiState.Success).user,
+                            isFavorite
+                        )
+                    }
                 }
             )
         }
     ) { paddingValues ->
-        // O recheio muda conforme o estado
         Box(modifier = Modifier.padding(paddingValues)) {
             when (val state = uiState) {
                 is ProfileUiState.Loading -> LoadingView()
@@ -130,7 +141,8 @@ fun PerfilCard(user: GitProfileEntity) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.Blue,
+                .background(
+                    Color.Blue,
                     RoundedCornerShape(
                         bottomStart = 16.dp,
                         bottomEnd = 16.dp
@@ -240,7 +252,6 @@ fun RepoCard(repo: GitRepoWeb) {
 
 @Composable
 fun LoadingView() {
-    // Usamos o fillMaxSize para que o círculo fique centralizado na tela toda
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -257,4 +268,23 @@ fun ErrorView(message: String) {
     ) {
         Text(text = message, color = Color.Red, fontWeight = FontWeight.Bold)
     }
+}
+
+@Composable
+fun FavoriteButton( viewModel: ProfileViewModel, userEntity: GitProfileEntity, isFavorite: Boolean) {
+    IconButton(onClick = {
+        if (isFavorite) {
+            viewModel.deletaFavorito(userEntity)
+        } else {
+            viewModel.salvaFavorito(userEntity)
+        }
+    }) {
+        Icon(
+            imageVector = if (isFavorite) Icons.Filled.Star else Icons.Default.StarBorder,
+            contentDescription = "Favoritar",
+            tint = if (isFavorite) Color(0xFFFFD700) else Color.Gray,
+            modifier = Modifier.size(32.dp)
+        )
+    }
+
 }

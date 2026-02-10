@@ -3,8 +3,8 @@ package com.app.devhub.screens.perfil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.devhub.data.local.room.GitProfileEntity
-import com.app.devhub.model.GitRepoWeb
 import com.app.devhub.data.repository.GitProfileRepository
+import com.app.devhub.model.GitRepoWeb
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +29,11 @@ class ProfileViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Empty)
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
 
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> = _isFavorite.asStateFlow()
+
+
+
     fun loadUser(username: String) {
         viewModelScope.launch {
             _uiState.value = ProfileUiState.Loading
@@ -45,5 +50,25 @@ class ProfileViewModel @Inject constructor(
                 e.printStackTrace()
             }
         }
+    }
+
+    fun checkFavoriteStatus(username: String) {
+        viewModelScope.launch {
+            _isFavorite.value = repository.isFavorite(username)
+        }
+    }
+
+    fun salvaFavorito (profile: GitProfileEntity) {
+        viewModelScope.launch {
+            repository.saveFavorite(profile)
+            _isFavorite.value = true
+        }
+    }
+    fun deletaFavorito (profile: GitProfileEntity) {
+        viewModelScope.launch {
+            repository.deleteFavorite(profile)
+            _isFavorite.value = false
+        }
+
     }
 }

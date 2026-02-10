@@ -3,12 +3,10 @@ package com.app.devhub.data.repository
 import com.app.devhub.data.local.room.GitProfileDao
 import com.app.devhub.data.local.room.GitProfileEntity
 import com.app.devhub.data.remote.retrofitApi.GitHubService
-import com.app.devhub.model.GitProfileWeb
 import com.app.devhub.model.GitRepoWeb
 import com.app.devhub.model.toEntity
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GitProfileRepository @Inject constructor(
