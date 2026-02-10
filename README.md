@@ -26,6 +26,8 @@
 - [x] Cache Inteligente: Repositório que gerencia dados locais (Room) e remotos.
 - [x] Navegação: Sistema de rotas dinâmicas com Navigation Compose.
 - [x] UI Dinâmica: Feedbacks de loading, erro e estados vazios com animações.
+- [x] Favoritos Offline: Salve perfis localmente para consultar mesmo sem internet.
+- [x] Gerenciamento de Favoritos: Adicione ou remova favoritos diretamente pela tela de perfil ou pela lista geral.
 
 ---
 
@@ -41,6 +43,7 @@ v0.3 - Integração com Retrofit e animações Lottie.
 v0.3 - Refatoração e melhorias de UI
 v0.4 - Adição da camada de persistência com Room.
 v0.5 - Refatoração para Repository Pattern e implementação de DI com Hilt.
+v0.6 - Implementação completa da Tela de Favoritos, lógica de Toggle (Favoritar/Desfavoritar) e refinamento de UX.
 
 ## 💡 Próximos passos
 
@@ -48,12 +51,12 @@ v0.5 - Refatoração para Repository Pattern e implementação de DI com Hilt.
 
 - ~~Adicionar persistência local (Room)~~
 
-- Implementar UI da tela de Favoritos.
+- ~~Implementar UI da tela de Favoritos.~~
 
-- Adicionar funcionalidade de "Desfavoritar" com feedback visual (Toast/Snackbar).
+- ~~Adicionar funcionalidade de "Desfavoritar" com feedback visual (Toast/Snackbar).~~
 
 - Melhorar o design dos cards de repositórios.
 
-- Melhorar feedback de loading
+- ~~Melhorar feedback de loading~~
 
 - Criar testes unitários
