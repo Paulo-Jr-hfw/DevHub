@@ -9,5 +9,7 @@ data class GitProfileEntity(
     val name: String?,
     val avatarUrl: String?,
     val bio: String?,
-    val repositories: Int?
+    val repositories: Int?,
+    val followers: Int?,
+    val following: Int?
 )

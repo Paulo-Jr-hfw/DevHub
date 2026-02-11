@@ -11,7 +11,9 @@ data class GitProfileWeb(
     @SerializedName("avatar_url")
     val avatarUrl: String?,
     @SerializedName("public_repos")
-    val repositories: Int?
+    val repositories: Int?,
+    val followers: Int?,
+    val following: Int?
 )
 
 fun GitProfileWeb.toEntity(): GitProfileEntity {
@@ -20,6 +22,8 @@ fun GitProfileWeb.toEntity(): GitProfileEntity {
         name = this.name,
         avatarUrl = this.avatarUrl,
         bio = this.bio,
-        repositories = this.repositories
+        repositories = this.repositories,
+        followers = this.followers,
+        following = this.following
     )
 }
