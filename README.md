@@ -1,6 +1,6 @@
 # DevHub App
 
-[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)]()
+[![Status](https://img.shields.io/badge/status-concluído-brightgreen)]()
 
 > App Android em Kotlin usando Jetpack Compose, Retrofit e Gson para buscar perfis do GitHub e mostrar informações em tempo real.
 
@@ -45,18 +45,3 @@ v0.4 - Adição da camada de persistência com Room.
 v0.5 - Refatoração para Repository Pattern e implementação de DI com Hilt.
 v0.6 - Implementação completa da Tela de Favoritos, lógica de Toggle (Favoritar/Desfavoritar) e refinamento de UX.
 
-## 💡 Próximos passos
-
-- ~~Implementar sistema de navegação com Navigation Compose~~
-
-- ~~Adicionar persistência local (Room)~~
-
-- ~~Implementar UI da tela de Favoritos.~~
-
-- ~~Adicionar funcionalidade de "Desfavoritar" com feedback visual (Toast/Snackbar).~~
-
-- Melhorar o design dos cards de repositórios.
-
-- ~~Melhorar feedback de loading~~
-
-- Criar testes unitários
