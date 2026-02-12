@@ -32,8 +32,14 @@
 ---
 
 ## 🎨 Layout / Screenshots
+<p align="center">
+![Tela Inicial](https://github.com/user-attachments/assets/3ba9569f-ee0b-4ddb-9545-a9b8ddfcc727)
+![Tela perfil](https://github.com/user-attachments/assets/c0d936a8-9f5f-41ad-8b67-bb67b77c214c)
+![Lista Favoritos](https://github.com/user-attachments/assets/81dd2d4f-4e02-4d8c-bfe9-3daea5fa82eb)
+</p>
 
-*em andamento*
+---
+
 
 ## 📝 Histórico de versões
 
